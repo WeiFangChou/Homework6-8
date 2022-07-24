@@ -19,7 +19,7 @@ class SpeakHistroy{
     }
 }
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,AVSpeechSynthesizerDelegate{
 
     
     
@@ -31,7 +31,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var speakHistoryTableView: UITableView!
     
     @IBOutlet weak var speakPlayButton: UIButton!
-    var speakHistroy : [SpeakHistroy] = [SpeakHistroy(speakText: "Hello World", speakRate: 1.0, speakSpeed: 1.0)]
+    var speakUtterance = AVSpeechUtterance()
+    
+    var speakSynthesizer = AVSpeechSynthesizer()
+    var speakHistroy : [SpeakHistroy] = [SpeakHistroy(speakText: "I Love Swift", speakRate: 1.0, speakSpeed: 1.0)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,33 +49,52 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // [0-1] Default = 1
         self.speakHistoryTableView.delegate = self
         self.speakHistoryTableView.dataSource = self
+        self.speakSynthesizer.delegate = self
     }
 
     
-    func speakFromText(speakStr:String) -> Bool{
-        if(!speakStr.isEmpty){
-            let speakUtterance = AVSpeechUtterance(string: speakStr)
-            speakUtterance.pitchMultiplier = speakRate.value
-            speakUtterance.rate = speakRate.value
-            speakUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
-            let speakSynthesizer = AVSpeechSynthesizer()
-            speakSynthesizer.speak(speakUtterance)
-            return true
-        }
-        return false
-        
-    }
+
     @IBAction func speak(_ sender: UIButton) {
         
-        if let speakText = speakTextfield.text, !speakText.isEmpty{
-            if(speakFromText(speakStr: speakText)){
-                speakPlayButton.setTitle("暫停", for: .normal)
+        
+        if(speakSynthesizer.isPaused){
+            speakSynthesizer.continueSpeaking()
+            
+        }else if(speakSynthesizer.isSpeaking){
+            speakSynthesizer.pauseSpeaking(at: AVSpeechBoundary.immediate)
+            
+        }else{
+            if let speakText = speakTextfield.text, !speakText.isEmpty{
+                speakUtterance = AVSpeechUtterance(string: speakText)
+                speakUtterance.pitchMultiplier = speakRate.value
+                speakUtterance.rate = speakRate.value
+                speakUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
+                speakSynthesizer.speak(speakUtterance)
+                speakHistroy.insert(SpeakHistroy(speakText: speakText, speakRate: speakRate.value, speakSpeed: speakSpeed.value),at: 0)
+                speakHistoryTableView.reloadData()
+
             }
-            let  speak = SpeakHistroy(speakText: speakText, speakRate: speakRate.value, speakSpeed: speakSpeed.value)
-            speakHistroy.append(speak)
-            speakHistoryTableView.reloadData()
-            speakPlayButton.setTitle("播放", for:  .normal)
+            
         }
+        
+        
+    }
+    
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        self.speakPlayButton.setTitle("播放", for: .normal)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        self.speakPlayButton.setTitle("暫停", for: .normal)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didPause utterance: AVSpeechUtterance) {
+        self.speakPlayButton.setTitle("繼續播放", for: .normal)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didContinue utterance: AVSpeechUtterance) {
+        self.speakPlayButton.setTitle("暫停", for: .normal)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,6 +126,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             speakHistroy.remove(at: indexPath.row)
             speakHistoryTableView.reloadData()
         }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
     }
     
 }

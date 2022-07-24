@@ -59,7 +59,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="播放"/>
                                 <connections>
-                                    <action selector="speak:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KyY-AN-w2F"/>
+                                    <action selector="speak:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R7h-Uy-RBI"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2Gs-Ix-snW">
