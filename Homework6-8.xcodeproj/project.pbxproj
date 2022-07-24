@@ -13,6 +13,7 @@
 		1577AC96288D88000048F3AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1577AC94288D88000048F3AD /* Main.storyboard */; };
 		1577AC98288D88020048F3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1577AC97288D88020048F3AD /* Assets.xcassets */; };
 		1577AC9B288D88020048F3AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1577AC99288D88020048F3AD /* LaunchScreen.storyboard */; };
+		1577ACA5288D99F00048F3AD /* SpeakTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1577ACA4288D99F00048F3AD /* SpeakTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1577AC97288D88020048F3AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1577AC9A288D88020048F3AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1577AC9C288D88020048F3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1577ACA4288D99F00048F3AD /* SpeakTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeakTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		1577AC8D288D88000048F3AD /* Homework6-8 */ = {
 			isa = PBXGroup;
 			children = (
+				1577ACA4288D99F00048F3AD /* SpeakTableViewCell.swift */,
 				1577AC8E288D88000048F3AD /* AppDelegate.swift */,
 				1577AC90288D88000048F3AD /* SceneDelegate.swift */,
 				1577AC92288D88000048F3AD /* ViewController.swift */,
@@ -140,6 +143,7 @@
 			files = (
 				1577AC93288D88000048F3AD /* ViewController.swift in Sources */,
 				1577AC8F288D88000048F3AD /* AppDelegate.swift in Sources */,
+				1577ACA5288D99F00048F3AD /* SpeakTableViewCell.swift in Sources */,
 				1577AC91288D88000048F3AD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +299,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,6 +328,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
