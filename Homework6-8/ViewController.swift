@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class SpeakHistroy{
+class SpeakHistory{
     var speakText: String
     var speakRate: Float
     var speakSpeed: Float
@@ -24,17 +24,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     
     @IBOutlet weak var speakTextfield: UITextField!
-    
-
     @IBOutlet weak var speakSpeed: UISlider!
     @IBOutlet weak var speakRate: UISlider!
     @IBOutlet weak var speakHistoryTableView: UITableView!
-    
     @IBOutlet weak var speakPlayButton: UIButton!
-    var speakUtterance = AVSpeechUtterance()
     
+    
+    var speakUtterance = AVSpeechUtterance()
     var speakSynthesizer = AVSpeechSynthesizer()
-    var speakHistroy : [SpeakHistroy] = [SpeakHistroy(speakText: "I Love Swift", speakRate: 1.0, speakSpeed: 1.0)]
+    var speakHistory : [SpeakHistory] = [SpeakHistory(speakText: "I Love Swift", speakRate: 1.0, speakSpeed: 1.0)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +54,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     @IBAction func speak(_ sender: UIButton) {
         
-        
         if(speakSynthesizer.isPaused){
             speakSynthesizer.continueSpeaking()
             
@@ -70,14 +67,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 speakUtterance.rate = speakRate.value
                 speakUtterance.voice = AVSpeechSynthesisVoice(language: "zh-TW")
                 speakSynthesizer.speak(speakUtterance)
-                speakHistroy.insert(SpeakHistroy(speakText: speakText, speakRate: speakRate.value, speakSpeed: speakSpeed.value),at: 0)
+                speakHistory.insert(SpeakHistory(speakText: speakText, speakRate: speakRate.value, speakSpeed: speakSpeed.value),at: 0)
                 speakHistoryTableView.reloadData()
-
             }
-            
         }
-        
-        
     }
     
     
@@ -98,7 +91,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return  speakHistroy.count
+        return  speakHistory.count
     }
     
     
@@ -107,15 +100,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         guard let cell = speakHistoryTableView.dequeueReusableCell(withIdentifier: "speakHistroyCell", for: indexPath) as? SpeakTableViewCell else {
            return UITableViewCell()
         }
-        cell.speakText.text = speakHistroy[indexPath.row].speakText
-        cell.speakRate.text = "\(speakHistroy[indexPath.row].speakRate)"
-        cell.speakSpeed.text = "\(speakHistroy[indexPath.row].speakSpeed)"
+        cell.speakText.text = speakHistory[indexPath.row].speakText
+        cell.speakRate.text = "\(speakHistory[indexPath.row].speakRate)"
+        cell.speakSpeed.text = "\(speakHistory[indexPath.row].speakSpeed)"
         print("init cell")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let speak = speakHistroy[indexPath.row]
+        let speak = speakHistory[indexPath.row]
         speakTextfield.text = speak.speakText
         speakRate.value = speak.speakRate
         speakSpeed.value = speak.speakSpeed
@@ -123,12 +116,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == .delete){
-            speakHistroy.remove(at: indexPath.row)
+            speakHistory.remove(at: indexPath.row)
             speakHistoryTableView.reloadData()
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
 }
